@@ -1,0 +1,15 @@
+set terminal png size 1024,768
+
+set output "out/temperature_mode1_plot.png"
+
+set datafile separator ";"
+set xlabel "Station ID"
+set ylabel "Temperature (°C)"
+set title "Temperature Statistics"
+set xtics rotate by -90
+
+# Plot data with error bars
+if (!exists("filename")) filename='t1.csv'
+plot filename using 0:2:3:4 with yerrorbars title "Temperature Delta", \
+     filename using 0:2:xticlabels(1) with points title "Data Points", \
+     filename using 0:2 with lines title "Avg Temperature"
